@@ -1,0 +1,5 @@
+spring:
+  profiles:
+    active: dev #选用的配置文件
+  application:
+    name: auto-mail-client   #服务名称
