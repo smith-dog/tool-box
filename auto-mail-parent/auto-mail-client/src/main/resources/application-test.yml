@@ -1,0 +1,164 @@
+#eureka:
+#  instance:
+#    hostname: localhost
+#    prefer-ip-address: true
+#    instance-id: ${eureka.instance.hostname}:${server.port}
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8200/eureka/
+server:
+  port: 8600
+#-----------------------------------rabbit-----------------------------
+# RABBIT (RabbitProperties)
+#spring:
+#  rabbitmq:
+#    username: guest # Login user to authenticate to the broker.
+#    virtual-host: # Virtual host to use when connecting to the broker.
+#    addresses: # Comma-separated list of addresses to which the client should connect.
+#    connection-timeout: # Connection timeout. Set it to zero to wait forever.
+#    dynamic: true # Whether to create an AmqpAdmin bean.
+#    host: localhost # RabbitMQ host.
+#    password: guest # Login to authenticate against the broker.
+#    port: 5672 # RabbitMQ port.
+#    publisher-confirms: false # Whether to enable publisher confirms.
+#    publisher-returns: false # Whether to enable publisher returns.
+#    requested-heartbeat: # Requested heartbeat timeout; zero for none. If a duration suffix is not specified, seconds will be used.
+#    cache:
+#      channel:
+#        checkout-timeout: # Duration to wait to obtain a channel if the cache size has been reached.
+#        size: # Number of channels to retain in the cache.
+#      connection:
+#        mode: channel # Connection factory cache mode.
+#        size: # Number of connections to cache.
+#    listener:
+#      direct:
+#        acknowledge-mode: # Acknowledge mode of container.
+#        auto-startup: true # Whether to start the container automatically on startup.
+#        consumers-per-queue:  # Number of consumers per queue.
+#        default-requeue-rejected: # Whether rejected deliveries are re-queued by default.
+#        idle-event-interval: # How often idle container events should be published.
+#        prefetch: # Number of messages to be handled in a single request. It should be greater than or equal to the transaction size (if used).
+#        retry:
+#          enabled: false # Whether publishing retries are enabled.
+#          initial-interval: 1000ms # Duration between the first and second attempt to deliver a message.
+#          max-attempts: 3 # Maximum number of attempts to deliver a message.
+#          max-interval: 10000ms # Maximum duration between attempts.
+#          multiplier: 1 # Multiplier to apply to the previous retry interval.
+#          stateless: true # Whether retries are stateless or stateful.
+#      simple:
+#        acknowledge-mode:  # Acknowledge mode of container.
+#        auto-startup: true # Whether to start the container automatically on startup.
+#        concurrency: # Minimum number of listener invoker threads.
+#        default-requeue-rejected: # Whether rejected deliveries are re-queued by default.
+#        idle-event-interval: # How often idle container events should be published.
+#        max-concurrency: # Maximum number of listener invoker threads.
+#        prefetch: # Number of messages to be handled in a single request. It should be greater than or equal to the transaction size (if used).
+#        retry:
+#          enabled: false # Whether publishing retries are enabled.
+#          initial-interval: 1000ms # Duration between the first and second attempt to deliver a message.
+#          max-attempts: 3 # Maximum number of attempts to deliver a message.
+#          max-interval: 10000ms # Maximum duration between attempts.
+#          multiplier: 1 # Multiplier to apply to the previous retry interval.
+#          stateless: true # Whether retries are stateless or stateful.
+#        transaction-size:  # Number of messages to be processed in a transaction. That is, the number of messages between acks. For best results, it should be less than or equal to the prefetch count.
+#      type: simple # Listener container type.
+#    ssl:
+#      enabled: false # Whether to enable SSL support.
+#      key-store: # Path to the key store that holds the SSL certificate.
+#      key-store-password: # Password used to access the key store.
+#      key-store-type: PKCS12 # Key store type.
+#      trust-store: # Trust store that holds SSL certificates.
+#      trust-store-password: # Password used to access the trust store.
+#      trust-store-type: JKS # Trust store type.
+#      algorithm: # SSL algorithm to use. By default, configured by the Rabbit client library.
+#    template:
+#      exchange:  # Name of the default exchange to use for send operations.
+#      mandatory: # Whether to enable mandatory messages.
+#      receive-timeout: # Timeout for `receive()` operations.
+#      reply-timeout: # Timeout for `sendAndReceive()` operations.
+#      retry:
+#        enabled: false # Whether publishing retries are enabled.
+#        initial-interval: 1000ms # Duration between the first and second attempt to deliver a message.
+#        max-attempts: 3 # Maximum number of attempts to deliver a message.
+#        max-interval: 10000ms # Maximum duration between attempts.
+#        multiplier: 1 # Multiplier to apply to the previous retry interval.
+#      routing-key:  # Value of a default routing key to use for send operations.
+#----------------------------------redis----------------------------
+# REDIS (RedisProperties)
+#spring:
+#  redis:
+#    cluster:
+#      max-redirects: # Maximum number of redirects to follow when executing commands across the cluster.
+#      nodes: # Comma-separated list of "host:port" pairs to bootstrap from.
+#    database: 0 # Database index used by the connection factory.
+#    url: # Connection URL. Overrides host, port, and password. User is ignored. Example: redis://user:password@example.com:6379
+#    host: localhost # Redis server host.
+#    password: # Login password of the redis server.
+#    port: 6379 # Redis server port.
+#    sentinel:
+#      master: # Name of the Redis server.
+#      nodes: # Comma-separated list of "host:port" pairs.
+#    ssl: false # Whether to enable SSL support.
+#    timeout: # Connection timeout.
+#spring.redis.jedis.pool.max-active=8 # Maximum number of connections that can be allocated by the pool at a given time. Use a negative value for no limit.
+#spring.redis.jedis.pool.max-idle=8 # Maximum number of "idle" connections in the pool. Use a negative value to indicate an unlimited number of idle connections.
+#spring.redis.jedis.pool.max-wait=-1ms # Maximum amount of time a connection allocation should block before throwing an exception when the pool is exhausted. Use a negative value to block indefinitely.
+#spring.redis.jedis.pool.min-idle=0 # Target for the minimum number of idle connections to maintain in the pool. This setting only has an effect if it is positive.
+#    lettuce:
+#      pool:
+#        max-active: 8 # Maximum number of connections that can be allocated by the pool at a given time. Use a negative value for no limit.
+#        max-idle: 8 # Maximum number of "idle" connections in the pool. Use a negative value to indicate an unlimited number of idle connections.
+#        max-wait: -1ms # Maximum amount of time a connection allocation should block before throwing an exception when the pool is exhausted. Use a negative value to block indefinitely.
+#        min-idle: 0 # Target for the minimum number of idle connections to maintain in the pool. This setting only has an effect if it is positive.
+#      shutdown-timeout: 100ms # Shutdown timeout.
+
+#------------------------------------mail-----------------------------
+# Email (MailProperties)
+spring:
+  mail:
+    default-encoding: UTF-8 # Default MimeMessage encoding.
+    host: 172.16.0.87 # SMTP server host. For instance, `smtp.example.com`.
+    username: jiweiyu@rt.com # Login user of the SMTP server.
+    password: 1 # Login password of the SMTP server.
+    port: 25 # SMTP server port.
+#    jndi-name:  # Session JNDI name. When set, takes precedence over other Session settings.
+#    properties.*:  # Additional JavaMail Session properties.
+    protocol: smtp # Protocol used by the SMTP server.
+    test-connection: false # Whether to test that the mail server is available on startup.
+
+mail:
+  from: jiweiyu@rt.com  #作者
+  to: #发送的列表人物
+    - jiweiyu@rt.com
+  cc: #抄送的列表人物
+    - jiweiyu@rt.com
+  path: src/main/resources/static/image/picture.jpg       #发送附件的地址
+  subject:
+    subjectContent: work report
+    subjectTail: jiweiyu
+    subjectMonth:
+    subjectWeekOfMonth:
+    subjectHead:
+  tail: from jiweiyu's robot, version 1.0
+  content: 附件是工作周报，请查收。
+#---------------------------------------freemaker-------------------------------
+# FREEMARKER (FreeMarkerProperties)
+#spring:
+#  freemarker:
+#    template-loader-path: classpath:/templates/ # Comma-separated list of template paths.
+#    allow-request-override: false # Whether HttpServletRequest attributes are allowed to override (hide) controller generated model attributes of the same name.
+#    allow-session-override: false # Whether HttpSession attributes are allowed to override (hide) controller generated model attributes of the same name.
+#    cache: false # Whether to enable template caching.
+#    charset: UTF-8 # Template encoding.
+#    check-template-location: true # Whether to check that the templates location exists.
+#    content-type: text/html # Content-Type value.
+#    enabled: true # Whether to enable MVC view resolution for this technology.
+#    expose-request-attributes: false # Whether all request attributes should be added to the model prior to merging with the template.
+#    expose-session-attributes: false # Whether all HttpSession attributes should be added to the model prior to merging with the template.
+#    expose-spring-macro-helpers: true # Whether to expose a RequestContext for use by Spring's macro library, under the name "springMacroRequestContext".
+#    prefer-file-system-access: true # Whether to prefer file system access for template loading. File system access enables hot detection of template changes.
+#    prefix:  # Prefix that gets prepended to view names when building a URL.
+#    request-context-attribute:  # Name of the RequestContext attribute for all views.
+#    settings.*: # Well-known FreeMarker keys which are passed to FreeMarker's Configuration.
+#    suffix: .ftl # Suffix that gets appended to view names when building a URL.
+#    view-names:  # White list of view names that can be resolved.
