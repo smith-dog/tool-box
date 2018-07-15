@@ -1,0 +1,7 @@
+logging:
+  config: logback-spring-dev.xml  #logback-spring.xml
+
+HRpc:
+  zkSessionTimeout: 1000
+  zkDataPath: /HRpc/data
+  zkRegistryPath: /HRpc

@@ -8,27 +8,23 @@ import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 import javax.mail.*;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import java.io.File;
-import java.io.IOException;
+import javax.mail.internet.MimeUtility;
+import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoField;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * @Auther: smith-dog
@@ -42,8 +38,6 @@ public class MailServiceImpl implements MailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    String Sender = "jiweiyu@rt.com";
-
     @Autowired
     private MailProperties mailProperties;
 
@@ -51,50 +45,71 @@ public class MailServiceImpl implements MailService {
     @Autowired
     private FreeMarkerConfigurer configurer;
 
+    private static Random random = new Random();
+
     @Override
+    @Scheduled(cron="0 0 15 * * 5")
     public void sendMail() {
-        MimeMessage message = null;
-        try {
-            message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-            helper.setFrom(mailProperties.getFrom());
-            helper.setTo(mailProperties.getTo().stream().toArray(String[] :: new));
-            helper.setCc(mailProperties.getCc().stream().toArray(String[] :: new));
-            helper.setSubject(generateSubject());
-
-
-            Map<String, Object> model = new HashMap<>();
-            model.put("params", new Object());
+            MimeMessage message = null;
+            System.getProperties().setProperty("mail.mime.splitlongparameters", "false");
             try {
-                Template template = configurer.getConfiguration().getTemplate("message.ftl");
-                String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
-                helper.setText(text,true);
+                message = mailSender.createMimeMessage();
+                MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+                helper.setFrom(mailProperties.getFrom());
+                helper.setTo(mailProperties.getTo().stream().toArray(String[]::new));
+                helper.setCc(mailProperties.getCc().stream().toArray(String[]::new));
+                helper.setSubject("云平台部_纪炜煜_" + generateSubject());
+
+                Map<String, Object> model = new HashMap<>();
+                //model.put("params", "hahahaha");
+                model.put("subject", generateSubject());
+                model.put("date", LocalDateTime.now().toString());
+                model.put("keyword", "my report never late");
+                model.put("weather", "137826142@qq.com");
+                model.put("content", generateContent());
+                model.put("email", "137826142");
+                try {
+                    Template template = configurer.getConfiguration().getTemplate("message.ftl");
+                    String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
+                    helper.setText(text, true);
 
 
-                ClassPathResource facebook = new ClassPathResource("images/facebook.gif");
-                ClassPathResource header = new ClassPathResource("images/header.jpg");
-                ClassPathResource pic1 = new ClassPathResource("images/pic1.jpg");
-                ClassPathResource tweet = new ClassPathResource("images/tweet.gif");
-                helper.addInline("facebook.gif",facebook);
-                helper.addInline("header.jpg",header);
-                helper.addInline("pic1.jpg",pic1);
-                helper.addInline("ftweet.gif",tweet);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (TemplateException e) {
+                    ClassPathResource header = new ClassPathResource("images/header.jpg");
+                    ClassPathResource pic1 = new ClassPathResource("images/pic/pic1.jpg");
+                    ClassPathResource pic4 = new ClassPathResource("images/pic/pic4.gif");
+                    ClassPathResource pic5 = new ClassPathResource("images/pic/pic5.gif");
+                    List<ClassPathResource> picList = new ArrayList<>();
+                    picList.add(pic1);
+                    picList.add(pic4);
+                    picList.add(pic5);
+
+                    ClassPathResource weixin = new ClassPathResource("images/weixin.png");
+                    ClassPathResource qq = new ClassPathResource("images/qq.png");
+                    helper.addInline("header.jpg", header);
+                    helper.addInline("pic1.jpg", picList.get(random.nextInt(picList.size())));
+                    helper.addInline("weixin.png", qq);
+                    helper.addInline("qq.png", weixin);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (TemplateException e) {
+                    e.printStackTrace();
+                }
+
+                //注意项目路径问题，自动补用项目路径
+                //String s = "E:\\杂项";
+                File attachment = new File(mailProperties.getPath());
+                //fileCopy(attachment,attachmentCopy);
+
+                FileSystemResource file = new FileSystemResource(new File(mailProperties.getPath().trim()));
+
+                //加入邮件
+                helper.addAttachment("云平台部_纪炜煜_" + generateSubject() +".xlsx", file);
+            } catch (MessagingException e) {
                 e.printStackTrace();
             }
 
-
-            //注意项目路径问题，自动补用项目路径
-            //String s = "E:\\杂项";
-            FileSystemResource file = new FileSystemResource(new File(mailProperties.getPath()));
-            //加入邮件
-            helper.addAttachment("weiyuji.jpg", file);
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
         mailSender.send(message);
+
     }
 
     public void receiver() {
@@ -171,6 +186,10 @@ public class MailServiceImpl implements MailService {
         Subject subject = mailProperties.getSubject();
         LocalDate localDate = LocalDate.now();
 
+        if (StringUtils.isEmpty(subject.getSubjectYear())) {
+            subject.setSubjectYear(String.valueOf(localDate.getYear()));
+        }
+
         if (StringUtils.isEmpty(subject.getSubjectMonth())) {
             subject.setSubjectMonth(String.valueOf(localDate.getMonth().getValue()));
         }
@@ -193,11 +212,27 @@ public class MailServiceImpl implements MailService {
     public String generateContent() {
         LocalDate localDate = LocalDate.now();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Dear all:"+"\n");
+        stringBuilder.append("Dear all:" + "\n");
         stringBuilder.append("    ");
-        stringBuilder.append(mailProperties.getContent()+"\n");
+        stringBuilder.append(mailProperties.getContent() + "\n");
         stringBuilder.append(localDate);
         return stringBuilder.toString();
+    }
+
+
+    public void fileCopy(File fileFrom, File fileTo) {
+
+        try{
+            FileInputStream fileInputStream = new FileInputStream(fileFrom);
+            FileOutputStream fileOutputStream = new FileOutputStream(fileTo);
+            byte[] buffer = new byte[1024];
+            while (fileInputStream.read(buffer) > 0) {
+                fileOutputStream.write(buffer);
+            }
+            fileOutputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

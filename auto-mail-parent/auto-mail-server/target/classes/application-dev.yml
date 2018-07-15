@@ -1,0 +1,14 @@
+server:
+  port: 8200
+eureka:
+  instance:
+    hostname: localhost     # 显示的ip名称
+    prefer-ip-address: true   #选用ip地址
+    instance-id: ${eureka.instance.hostname}:${server.port} #显示规则
+  client:
+    registerWithEureka: false  #是否注册自己
+    fetch-registry: false  #是否从eureka服务器获取注册信息
+    serviceUrl:
+      defaultZone: http://localhost:8200/eureka/
+  server:
+    enable-self-preservation: false   #是否开启自动保护警告

@@ -13,6 +13,8 @@ import lombok.Data;
 @Builder
 public class Subject {
 
+    private String subjectYear;
+
     private String subjectMonth;
 
     private String subjectWeekOfMonth;
@@ -25,6 +27,6 @@ public class Subject {
 
     @Override
     public String toString() {
-        return subjectMonth + "月" + "第" + subjectWeekOfMonth + "周" + subjectHead + subjectContent + subjectTail;
+        return subjectYear + "年" + subjectMonth + "月" + "第" + subjectWeekOfMonth + "周" + subjectHead + subjectContent + subjectTail;
     }
 }

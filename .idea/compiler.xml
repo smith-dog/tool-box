@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="auto-mail-client" />
+        <module name="auto-mail-common" />
+        <module name="auto-mail-config-server" />
+        <module name="auto-mail-server" />
+        <module name="hrpc" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

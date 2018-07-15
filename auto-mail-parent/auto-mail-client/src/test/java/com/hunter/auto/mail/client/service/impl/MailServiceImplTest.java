@@ -21,7 +21,7 @@ public class MailServiceImplTest {
     MailServiceImpl mailService;
 
     @Test
-    public void sendAttachmentsMail() {
+    public void sendMail() {
         mailService.sendMail();
     }
 }

@@ -1,5 +1,6 @@
 package com.hunter.auto.mail.client.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
  * @Description:
  */
 @Data
+@Builder
 public class Mail {
     private String from;
     private List<String> to;
@@ -17,34 +19,4 @@ public class Mail {
     private String subject;
     private String content;
     private String[] fileList;
-
-    public Mail(List<String> to, String subject, String content) {
-        this.to = to;
-        this.subject = subject;
-        this.content = content;
-    }
-
-    public Mail(List<String> to, String subject, String content, String[] fileList) {
-        this.to = to;
-        this.subject = subject;
-        this.content = content;
-        this.fileList = fileList;
-    }
-
-    public Mail(List<String> to, List<String> cc, String subject, String content, String[] fileList) {
-        this.to = to;
-        this.cc = cc;
-        this.subject = subject;
-        this.content = content;
-        this.fileList = fileList;
-    }
-
-    public Mail(String from, List<String> to, List<String> cc, String subject, String content, String[] fileList) {
-        this.from = from;
-        this.to = to;
-        this.cc = cc;
-        this.subject = subject;
-        this.content = content;
-        this.fileList = fileList;
-    }
 }

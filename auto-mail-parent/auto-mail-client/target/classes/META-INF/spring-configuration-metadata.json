@@ -1,0 +1,47 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.hunter.auto.mail.client.properties.MailProperties",
+      "name": "mail",
+      "type": "com.hunter.auto.mail.client.properties.MailProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.hunter.auto.mail.client.properties.MailProperties",
+      "name": "mail.cc",
+      "type": "java.util.List<java.lang.String>"
+    },
+    {
+      "sourceType": "com.hunter.auto.mail.client.properties.MailProperties",
+      "name": "mail.content",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.hunter.auto.mail.client.properties.MailProperties",
+      "name": "mail.from",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.hunter.auto.mail.client.properties.MailProperties",
+      "name": "mail.path",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.hunter.auto.mail.client.properties.MailProperties",
+      "name": "mail.subject",
+      "type": "com.hunter.auto.mail.client.entity.Subject"
+    },
+    {
+      "sourceType": "com.hunter.auto.mail.client.properties.MailProperties",
+      "name": "mail.tail",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.hunter.auto.mail.client.properties.MailProperties",
+      "name": "mail.to",
+      "type": "java.util.List<java.lang.String>"
+    }
+  ]
+}

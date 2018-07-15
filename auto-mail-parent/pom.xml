@@ -15,6 +15,7 @@
         <module>auto-mail-server</module>
         <module>auto-mail-client</module>
         <module>auto-mail-common</module>
+        <module>auto-mail-config-server</module>
     </modules>
 
     <parent>
@@ -30,6 +31,8 @@
         <java.version>1.8</java.version>
         <spring-cloud-task.version>2.0.0.RELEASE</spring-cloud-task.version>
         <spring-cloud.version>Finchley.RC2</spring-cloud.version>
+        <!-- maven打包跳过test -->
+        <skipTests>true</skipTests>
     </properties>
 
     <dependencyManagement>
@@ -75,4 +78,6 @@
             </snapshots>
         </repository>
     </repositories>
+
+
 </project>

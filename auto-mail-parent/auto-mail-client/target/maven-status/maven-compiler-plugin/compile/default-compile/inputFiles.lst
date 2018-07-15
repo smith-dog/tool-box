@@ -1,0 +1,11 @@
+E:\workspace\tool-box\auto-mail-parent\auto-mail-client\src\main\java\com\hunter\auto\mail\client\service\MailService.java
+E:\workspace\tool-box\auto-mail-parent\auto-mail-client\src\main\java\com\hunter\auto\mail\client\entity\Mail.java
+E:\workspace\tool-box\auto-mail-parent\auto-mail-client\src\main\java\com\hunter\auto\mail\client\properties\MailProperties.java
+E:\workspace\tool-box\auto-mail-parent\auto-mail-client\src\main\java\com\hunter\auto\mail\client\service\impl\MailServiceImpl.java
+E:\workspace\tool-box\auto-mail-parent\auto-mail-client\src\main\java\com\hunter\auto\mail\client\entity\Receiver.java
+E:\workspace\tool-box\auto-mail-parent\auto-mail-client\src\main\java\com\hunter\auto\mail\client\entity\Sender.java
+E:\workspace\tool-box\auto-mail-parent\auto-mail-client\src\main\java\com\hunter\auto\mail\client\listen\MailReceiver.java
+E:\workspace\tool-box\auto-mail-parent\auto-mail-client\src\main\java\com\hunter\auto\mail\client\entity\Subject.java
+E:\workspace\tool-box\auto-mail-parent\auto-mail-client\src\main\java\com\hunter\auto\mail\client\controller\MailController.java
+E:\workspace\tool-box\auto-mail-parent\auto-mail-client\src\main\java\com\hunter\auto\mail\client\AutoMailClientApplication.java
+E:\workspace\tool-box\auto-mail-parent\auto-mail-client\src\main\java\com\hunter\auto\mail\client\util\FileUtils.java
